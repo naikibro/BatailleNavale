@@ -1,9 +1,15 @@
+import map.Map;
+import pages.LandingPage;
+import pages.WarfieldPage;
+
 import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
 
         // ----- GLOBAL VARIABLES -----
+        Map map = new Map();
+        map.display();
 
         // ----- PAGE RENDERING -----
         SwingUtilities.invokeLater(() -> {

@@ -1,3 +1,5 @@
+package pages;
+
 import javax.swing.*;
 
 public class NativeUi {

@@ -1,7 +1,12 @@
+package pages;
+
+import common.MapComponent;
 import javax.swing.*;
 import java.awt.*;
 
 public class WarfieldPage extends NativeUi {
+
+    private MapComponent mapComponent;
 
     public WarfieldPage() {
         super();
@@ -14,12 +19,23 @@ public class WarfieldPage extends NativeUi {
         frame = new JFrame("Bataille Navale");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setMinimumSize(new Dimension(windowWidth, windowHeight));
-
-        // Using BorderLayout to manage major areas
         frame.setLayout(new BorderLayout());
 
         JLabel title = new JLabel("Bataille Navale", SwingConstants.CENTER);
         title.setFont(new Font("Arial", Font.BOLD, 40));
         frame.add(title, BorderLayout.NORTH);
+
+        // Initialize and add the MapComponent
+        mapComponent = new MapComponent();
+        frame.add(mapComponent.getPanel(), BorderLayout.CENTER);
+    }
+
+    @Override
+    public void display() {
+        SwingUtilities.invokeLater(() -> {
+            frame.pack();
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+        });
     }
 }
