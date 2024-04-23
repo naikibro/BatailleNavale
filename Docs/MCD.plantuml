@@ -1,0 +1,30 @@
+@startuml MCD
+
+class Map{
+    - id_map : int
+}
+
+class Tile{
+    - id_tile : int
+    - x : int
+    - y : int
+    - hit : boolean
+}
+
+class Ship{
+    - id_ship : int
+    - state : int
+}
+
+class Player{
+    -id_player : int
+}
+
+Player ---> Map : 1,1
+Player ---> Ship : 1,n
+Tile <--- Map : 1,n
+Ship ---> Tile : 1,n
+
+
+@enduml
+
