@@ -1,0 +1,37 @@
+@startuml MLD
+
+class Map{
+    - tiles : Tile[][]
+}
+
+class Tile{
+    - hit : boolean
+    - id_f_ship : int
+}
+
+class Ship{
+    - id_ship : int
+    - name : string
+    - destroy : boolean
+    - length : int
+    - touched : int
+    /' ---- Functions ------ '/
+    + Ship(name : string , length : int, id : int, id_f_player : int)
+}
+
+class Player{
+    - ships : Ship[]
+    - map : Map
+    - name : string
+    - score : int
+    + Player(name : string)
+}
+
+class Game{
+    - is_playing : boolean
+    - round : int
+    + getGame(jbdc : int)
+}
+
+@enduml
+
