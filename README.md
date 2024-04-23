@@ -15,8 +15,9 @@ Welcome to the GitHub repository for our Bataille Navale game, a Java implementa
 - [Installation](#2---installation)
 - [Running the Game](#3---running-the-game)
 - [Key Concepts](#4---key-concepts)
-- [Project Management](#5---project-management)
-- [License](#6---license)
+- [Documentation](#5---documentation)
+- [Project Management](#6---project-management)
+- [License](#7---license)
 
 ---
 
@@ -51,12 +52,17 @@ This project illustrates several key OOP concepts:
 - **Error Handling:** Implementing comprehensive error handling throughout the game to manage runtime exceptions effectively.
 - **GUI Development:** Employing Java Swing to create interactive and visually appealing user interfaces.
 
-## 5 - Project Management
+## 5 - Documentation
+You can access the documentation inside the [docs](Docs/MLD.plantuml) folder  
+Don't hesitate to contribute by raising any issues or completing documentationb
+![MLD](Docs/assets/images/MLD.png)
+
+## 6 - Project Management
 
 You can track our project management activities and progress on GitHub Projects:
 [Project Management Link](https://github.com/users/naikibro/projects/4/views/1)
 
-## 6 - License
+## 7 - License
 
 This project is open-sourced under the MIT license. See the `LICENSE` file for more details.
 
