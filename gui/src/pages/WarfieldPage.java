@@ -36,10 +36,6 @@ public class WarfieldPage extends NativeUi {
 
         // ----- SCOREBOARD -----
         frame.add(scoreboard.getPanel(), BorderLayout.EAST);
-
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
     }
 
     @Override

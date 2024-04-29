@@ -5,22 +5,22 @@ import java.util.List;
 
 public class Map {
 
-    private List<List<Object>> map;
+    private List<List<Tile>> map;
 
     public Map()
     {
         map = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            List<Object> sublist = new ArrayList<>();
+            List<Tile> sublist = new ArrayList<>();
             for (int j = 0; j < 10; j++) {
-                sublist.add(0);
+                sublist.add(new Tile(i, j));
             }
             map.add(sublist);
         }
     }
 
     public void display() {
-        for (List<Object> row : map) {
+        for (List<Tile> row : map) {
             for (Object element : row) {
                 System.out.print(element + " ");
             }
@@ -28,7 +28,7 @@ public class Map {
         }
     }
 
-    public List<List<Object>> getMap() {
+    public List<List<Tile>> getMap() {
         return map;
     }
 
