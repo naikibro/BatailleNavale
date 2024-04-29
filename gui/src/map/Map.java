@@ -28,7 +28,6 @@ public class Map {
         }
     }
 
-
     public List<List<Object>> getMap() {
         return map;
     }

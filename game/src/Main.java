@@ -1,3 +1,4 @@
+import common.Scoreboard;
 import map.Map;
 import pages.LandingPage;
 import pages.WarfieldPage;
@@ -9,12 +10,15 @@ public class Main {
 
         // ----- GLOBAL VARIABLES -----
         Map map = new Map();
-        map.display();
+        Scoreboard scoreboard = new Scoreboard();
 
         // ----- PAGE RENDERING -----
         SwingUtilities.invokeLater(() -> {
-            WarfieldPage warfieldPage = new WarfieldPage();
+
+            WarfieldPage warfieldPage = new WarfieldPage(scoreboard);
             LandingPage landingPage = new LandingPage();
+
+            // TODO: Add any new page here
 
             System.out.println("Instantiate");
             landingPage.setPlayAction(e -> {
@@ -22,6 +26,7 @@ public class Main {
                 warfieldPage.display();
                 landingPage.hide();
             });
+
             System.out.println("Instantiated");
             landingPage.display();
         });
