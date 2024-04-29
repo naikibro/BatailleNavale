@@ -1,7 +1,7 @@
 
 # Bataille Navale
 
-
+![boat gif](Docs/assets/images/boat.gif)
 Welcome to the GitHub repository for our Bataille Navale game, a Java implementation of the classic Battleship game using Swing for graphical user interface components. This project is designed to showcase advanced concepts of Object-Oriented Programming (OOP) such as polymorphism, encapsulation, and introspection, along with robust error handling.
 
 ## Authors
@@ -11,21 +11,24 @@ Welcome to the GitHub repository for our Bataille Navale game, a Java implementa
 
 ## Table of Contents
 
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Running the Game](#running-the-game)
-- [Key Concepts](#key-concepts)
-- [Project Management](#project-management)
-- [License](#license)
+- [Prerequisites](#1---prerequisites)
+- [Installation](#2---installation)
+- [Running the Game](#3---running-the-game)
+- [Key Concepts](#4---key-concepts)
+- [Documentation](#5---documentation)
+- [Project Management](#6---project-management)
+- [License](#7---license)
 
-## Prerequisites
+---
+
+## 1 - Prerequisites
 
 To run this project, you'll need:
 
 - Java Development Kit (JDK) 17
 - An IDE such as IntelliJ IDEA or Eclipse
 
-## Installation
+## 2 - Installation
 
 1. Clone the repository:
    ```bash
@@ -35,11 +38,11 @@ To run this project, you'll need:
    - **IntelliJ:** Open -> Select the cloned directory -> Open as Project
    - **Eclipse:** File -> Open Projects from File System... -> Directory...
 
-## Running the Game
+## 3 - Running the Game
 
 To run the game, navigate to the `src` directory in your IDE and run the main class. Make sure that your environment is configured to use JDK 17.
 
-## Key Concepts
+## 4 - Key Concepts
 
 This project illustrates several key OOP concepts:
 
@@ -49,12 +52,17 @@ This project illustrates several key OOP concepts:
 - **Error Handling:** Implementing comprehensive error handling throughout the game to manage runtime exceptions effectively.
 - **GUI Development:** Employing Java Swing to create interactive and visually appealing user interfaces.
 
-## Project Management
+## 5 - Documentation
+You can access the documentation inside the [docs](Docs/MLD.plantuml) folder  
+Don't hesitate to contribute by raising any issues or completing documentationb
+![MLD](Docs/assets/images/MLD.png)
+
+## 6 - Project Management
 
 You can track our project management activities and progress on GitHub Projects:
 [Project Management Link](https://github.com/users/naikibro/projects/4/views/1)
 
-## License
+## 7 - License
 
 This project is open-sourced under the MIT license. See the `LICENSE` file for more details.
 
