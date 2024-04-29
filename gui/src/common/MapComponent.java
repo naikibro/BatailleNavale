@@ -1,6 +1,8 @@
 package common;
 
 import map.Map;
+import map.Tile;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
@@ -43,30 +45,30 @@ public class MapComponent {
      * The buttons interact with the Scoreboard to register hits.
      */
     private void initializePanel() {
-        int i = 1;
-        int j;
         panel = new JPanel();
         panel.setLayout(new GridLayout(10, 10));
 
-        List<List<Object>> mapData = map.getMap();
+        List<List<Tile>> mapData = map.getMap();
 
-        for (List<Object> row : mapData) {
-            final int rowIndex = i;
-            i++;
-            j = 1;
-            for (Object element : row) {
-                final int colIndex = j;
-                j++;
-                JButton button = new JButton(element.toString());
+        for (List<Tile> row : mapData) {
+            for (Tile tile : row) {
+                JButton button = new JButton();
 
                 /**
                  * Adds an action listener to the button.
                  * This listener responds to click events on a Tile.
                  */
                 button.addActionListener(e -> {
-                    // TODO: Handles the clicks on a Tile
-                    System.out.println("x: " + colIndex + ", y: " + rowIndex);
-                    scoreboard.hit(colIndex, rowIndex);
+                    int x = tile.getX();
+                    int y = tile.getY();
+
+                    System.out.println("click on x: " + x + ", y: " + y);
+
+                    // TODO : implement the Tile handling logic
+                    // TODO : implement the scoreboard logic
+                    scoreboard.hit(x, y);
+                    scoreboard.miss(x, y);
+                    scoreboard.destroy(x, y);
                 });
                 panel.add(button);
             }

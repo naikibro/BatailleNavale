@@ -34,14 +34,41 @@ public class Scoreboard extends NativeUi {
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
         // Set the size of the scrollable area to preferred size
-        scrollPane.setPreferredSize(new Dimension(200, 60));
+        scrollPane.setPreferredSize(new Dimension(300, 60));
     }
 
     // ----- M E T H O D S -----
 
     public void hit(int x, int y) {
         SwingUtilities.invokeLater(() -> {
-            JLabel label = new JLabel("Hit: " + x + ", " + y);
+            JLabel label = new JLabel("(" + x + ", " + y + ") - Player XXX hit a target");
+            label.setForeground(Color.ORANGE);
+            panel.add(label);
+            panel.revalidate();
+            panel.repaint();
+
+            scrollPane.revalidate();
+            scrollPane.repaint();
+        });
+    }
+
+    public void destroy(int x, int y) {
+        SwingUtilities.invokeLater(() -> {
+            JLabel label = new JLabel("(" + x + ", " + y + ") - Player XXX destroyed a XXX ship");
+            label.setForeground(Color.RED);
+            panel.add(label);
+            panel.revalidate();
+            panel.repaint();
+
+            scrollPane.revalidate();
+            scrollPane.repaint();
+        });
+    }
+
+    public void miss(int x, int y) {
+        SwingUtilities.invokeLater(() -> {
+            JLabel label = new JLabel("(" + x + ", " + y + ") - Player XXX missed a shot");
+            label.setForeground(Color.CYAN);
             panel.add(label);
             panel.revalidate();
             panel.repaint();
