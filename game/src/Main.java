@@ -41,6 +41,8 @@ public class Main {
             player2Fleet = deserializeFleet("fleet.ser");
         }
 
+        player1.setFleet(player1Fleet);
+        player1.randomlyPlaceShips();
         // Print fleet status for player1 (optional)
         player1Fleet.printFleetStatus();
         player2Fleet.printFleetStatus();

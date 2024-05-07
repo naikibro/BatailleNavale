@@ -35,7 +35,7 @@ public class WarfieldPage extends NativeUi {
         frame.add(title, BorderLayout.NORTH);
 
         // ----- MAP -----
-        mapComponent = new MapComponent(scoreboard);
+        mapComponent = new MapComponent(scoreboard, player1.getPlayerMap());
         frame.add(mapComponent.getPanel(), BorderLayout.CENTER);
 
         // ----- SCOREBOARD -----
