@@ -1,15 +1,19 @@
 package pages;
 
 import common.MapComponent;
+import common.Scoreboard;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class WarfieldPage extends NativeUi {
 
     private MapComponent mapComponent;
+    private Scoreboard scoreboard;
 
-    public WarfieldPage() {
+    public WarfieldPage(Scoreboard sboard) {
         super();
+        scoreboard = sboard;
         useNativeUI();
 
         // Create and set up the window
@@ -21,13 +25,17 @@ public class WarfieldPage extends NativeUi {
         frame.setMinimumSize(new Dimension(windowWidth, windowHeight));
         frame.setLayout(new BorderLayout());
 
+        // ----- WINDOW TITLE -----
         JLabel title = new JLabel("Bataille Navale", SwingConstants.CENTER);
         title.setFont(new Font("Arial", Font.BOLD, 40));
         frame.add(title, BorderLayout.NORTH);
 
-        // Initialize and add the MapComponent
-        mapComponent = new MapComponent();
+        // ----- MAP -----
+        mapComponent = new MapComponent(scoreboard);
         frame.add(mapComponent.getPanel(), BorderLayout.CENTER);
+
+        // ----- SCOREBOARD -----
+        frame.add(scoreboard.getPanel(), BorderLayout.EAST);
     }
 
     @Override
