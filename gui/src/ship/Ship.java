@@ -1,6 +1,8 @@
 package ship;
 
-public class Ship {
+import java.io.Serializable;
+
+public class Ship implements Serializable {
     private int id;
     protected String name;
     private boolean destroy;
@@ -11,6 +13,14 @@ public class Ship {
         this.id = id;
         this.destroy = false;
         this.touched = 0;
+    }
+
+    public void updateStats()
+    {
+        if(touched == length)
+        {
+            setDestroy(true);
+        }
     }
 
     public boolean isDestroy() {

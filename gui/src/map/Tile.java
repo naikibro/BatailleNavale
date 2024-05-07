@@ -16,12 +16,6 @@ public class Tile {
         this.isHit = false;
     }
 
-    Tile(int x, int y, boolean isHit) {
-        this.x = x;
-        this.y = y;
-        this.isHit = isHit;
-    }
-
     // ----- M E T H O D S -----
 
 

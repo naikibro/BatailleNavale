@@ -1,17 +1,21 @@
 package pages;
 
 import common.MapComponent;
+import common.Player;
 import common.Scoreboard;
+import fleet.Fleet;
 
 import javax.swing.*;
 import java.awt.*;
+
+import static fleet.Fleet.deserializeFleet;
 
 public class WarfieldPage extends NativeUi {
 
     private MapComponent mapComponent;
     private Scoreboard scoreboard;
 
-    public WarfieldPage(Scoreboard sboard) {
+    public WarfieldPage(Scoreboard sboard, Player player1, Player player2) {
         super();
         scoreboard = sboard;
         useNativeUI();
@@ -36,6 +40,13 @@ public class WarfieldPage extends NativeUi {
 
         // ----- SCOREBOARD -----
         frame.add(scoreboard.getPanel(), BorderLayout.EAST);
+
+        JButton button = new JButton(player1.getName() + " " + player2.getName());
+        button.addActionListener(e -> {
+            System.out.println(player1.getName() + " " + player2.getName());
+        });
+
+        frame.add(button, BorderLayout.SOUTH);
     }
 
     @Override
