@@ -1,5 +1,6 @@
 package map;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +30,12 @@ public class Map {
     }
 
     public List<List<Tile>> getMap() {
-        return map;
+        return this.map;
     }
+
+    public void setMap(List<List<Tile>> map) {
+        this.map = map;
+    }
+
 
 }

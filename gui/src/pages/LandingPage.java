@@ -1,5 +1,7 @@
 package pages;
 
+import common.Player;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,7 +18,7 @@ public class LandingPage extends NativeUi {
     private JButton playButton;
     public ActionListener playAction;
 
-    public LandingPage() {
+    public LandingPage(Player player) {
         super();
         useNativeUI();
 
@@ -43,6 +45,9 @@ public class LandingPage extends NativeUi {
         namePanel.add(playerName);
 
         playButton = new JButton("Play");  // Initialize the button
+        playButton.addActionListener(actionEvent -> {
+            player.setName(playerName.getText());
+        });
 
         namePanel.add(playButton);
         centerPanel.add(namePanel);

@@ -3,6 +3,7 @@ package map;
 public class Tile {
 
     private int x, y;
+
     private int id_ship;
 
     private boolean isHit;
@@ -13,13 +14,8 @@ public class Tile {
 
         this.x = x;
         this.y = y;
+        this.id_ship = -1;
         this.isHit = false;
-    }
-
-    Tile(int x, int y, boolean isHit) {
-        this.x = x;
-        this.y = y;
-        this.isHit = isHit;
     }
 
     // ----- M E T H O D S -----
@@ -50,4 +46,11 @@ public class Tile {
         isHit = hit;
     }
 
+    public int getId_ship() {
+        return id_ship;
+    }
+
+    public void setId_ship(int id_ship) {
+        this.id_ship = id_ship;
+    }
 }

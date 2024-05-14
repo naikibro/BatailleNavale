@@ -23,9 +23,9 @@ public class MapComponent {
      * Constructs a MapComponent with a new Map and a given Scoreboard.
      * @param sboard The Scoreboard object used to register hits.
      */
-    public MapComponent(Scoreboard sboard) {
-        map = new Map();
-        scoreboard = sboard;
+    public MapComponent(Scoreboard sboard, Map map) {
+        this.map = map;
+        this.scoreboard = sboard;
         initializePanel();
     }
 
@@ -62,7 +62,7 @@ public class MapComponent {
                     int x = tile.getX();
                     int y = tile.getY();
 
-                    System.out.println("click on x: " + x + ", y: " + y);
+                    System.out.println("click on x: " + x + ", y: " + y + " id_ship = " + tile.getId_ship());
 
                     // TODO : implement the Tile handling logic
                     // TODO : implement the scoreboard logic
