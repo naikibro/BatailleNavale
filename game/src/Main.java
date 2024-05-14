@@ -1,16 +1,12 @@
+import common.Game;
 import common.Player;
 import common.Scoreboard;
-import fleet.Fleet;
 import map.Map;
+import pages.GameOverPage;
 import pages.LandingPage;
 import pages.WarfieldPage;
-import ship.Cruiser;
-import ship.Destroyer;
-import ship.Submarine;
-import common.Player;
 
 import javax.swing.*;
-
 import java.io.File;
 
 import static fleet.Fleet.deserializeFleet;
@@ -20,46 +16,40 @@ public class Main {
 
         // ----- GLOBAL VARIABLES -----
         Map map = new Map();
+        Game game = new Game(map);
         Scoreboard scoreboard = new Scoreboard();
         Player player1 = new Player("");
-        Player player2 = new Player("Computer");
+        Player player2 = new Player();
 
-        // Creating fleets for player1 and player2 with default ships
-        Fleet player1Fleet = new Fleet();
-        Fleet player2Fleet = new Fleet();
-
+        // Loading the fleets from Serialization if exists
         File tempFile = new File("temp.ser");
         if (tempFile.exists()) {
-            System.out.println("Loading fleet from temp file");
-            Fleet tempFleet = deserializeFleet("temp.ser");
-            if (tempFleet != null) {
-                player1Fleet = tempFleet;
-            }
+            System.out.println("Loading fleet from save file");
+            player1.setFleet(deserializeFleet("temp.ser"));
         } else {
             System.out.println("Loading fleet from default config file");
-            player1Fleet = deserializeFleet("fleet.ser");
-            player2Fleet = deserializeFleet("fleet.ser");
+            player1.setFleet(deserializeFleet("fleet.ser"));
+            player2.setFleet(deserializeFleet("fleet.ser"));
         }
-
-        player1.setFleet(player1Fleet);
-        player1.randomlyPlaceShips();
-        // Print fleet status for player1 (optional)
-        player1Fleet.printFleetStatus();
-        player2Fleet.printFleetStatus();
 
         // ----- PAGE RENDERING -----
         SwingUtilities.invokeLater(() -> {
-
             WarfieldPage warfieldPage = new WarfieldPage(scoreboard, player1, player2);
             LandingPage landingPage = new LandingPage(player1);
+            GameOverPage gameOverPage = new GameOverPage(scoreboard, player1, player2);
 
-            // TODO: Add any new page here
-
-            System.out.println("Instantiate");
+            // Set up the action for the play button
             landingPage.setPlayAction(e -> {
                 System.out.println("Let's play !");
                 warfieldPage.display();
+                warfieldPage.revalidateComponents();
                 landingPage.hide();
+            });
+
+            warfieldPage.setEndGameAction(e -> {
+                System.out.println("End Game !");
+                gameOverPage.display();
+                warfieldPage.hide();
             });
 
             System.out.println("Instantiated");

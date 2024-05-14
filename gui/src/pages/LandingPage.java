@@ -47,6 +47,9 @@ public class LandingPage extends NativeUi {
         playButton = new JButton("Play");  // Initialize the button
         playButton.addActionListener(actionEvent -> {
             player.setName(playerName.getText());
+            if (playAction != null) {
+                playAction.actionPerformed(actionEvent);
+            }
         });
 
         namePanel.add(playButton);
@@ -54,7 +57,7 @@ public class LandingPage extends NativeUi {
     }
 
     public void setPlayAction(ActionListener playAction) {
-        this.playButton.addActionListener(playAction);
+        this.playAction = playAction;
     }
 
 }
