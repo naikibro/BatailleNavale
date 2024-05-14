@@ -2,20 +2,18 @@ package common;
 
 import map.Map;
 
-import javax.swing.*;
-import java.util.List;
-
 public class Game {
 
-    public boolean isPlaying = false;
-    public int phase;
-    public Map map;
+    static public boolean isPlaying = false;
+    static public int phase, turn;
+    static public Map map;
 
-    Game(Map map){
+    public Game(Map map){
 
-        this.map = map;
-        this.isPlaying = false;
-        this.phase = 0;
+        Game.map = map;
+        Game.isPlaying = false;
+        Game.phase = 0;
+        Game.turn = 0;
     }
 
     // ----- M E T H O D S -----
