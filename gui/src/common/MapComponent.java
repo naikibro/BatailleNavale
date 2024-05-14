@@ -16,25 +16,13 @@ public class MapComponent {
     private Map map;
     private JPanel panel;
     private Scoreboard scoreboard;
+    private Player ownerPlayer;
 
     // ----- C O N S T R U C T O R S -----
-
-    /**
-     * Constructs a MapComponent with a new Map and a given Scoreboard.
-     * @param sboard The Scoreboard object used to register hits.
-     */
-    public MapComponent(Scoreboard sboard, Map map) {
-        this.map = map;
-        this.scoreboard = sboard;
-        initializePanel();
-    }
-
-    /**
-     * Constructs a MapComponent with a given Map.
-     * @param map The Map object to use for this component.
-     */
-    public MapComponent(Map map) {
-        this.map = map;
+        public MapComponent(Scoreboard sboard, Player ownerPlayer) {
+        map = new Map();
+        scoreboard = sboard;
+        this.ownerPlayer = ownerPlayer;
         initializePanel();
     }
 
@@ -62,13 +50,13 @@ public class MapComponent {
                     int x = tile.getX();
                     int y = tile.getY();
 
-                    System.out.println("click on x: " + x + ", y: " + y + " id_ship = " + tile.getId_ship());
+                    System.out.println("click on x: " + x + ", y: " + y);
 
                     // TODO : implement the Tile handling logic
                     // TODO : implement the scoreboard logic
-                    scoreboard.hit(x, y);
-                    scoreboard.miss(x, y);
-                    scoreboard.destroy(x, y);
+                    scoreboard.hit(this.ownerPlayer, x, y);
+                    scoreboard.miss(this.ownerPlayer, x, y);
+                    scoreboard.destroy(this.ownerPlayer, x, y);
                 });
                 panel.add(button);
             }
