@@ -11,13 +11,42 @@ class Tile{
 
 class Ship{
     - id_ship : int
-    - name : string
+    # name : string
     - destroy : boolean
-    - length : int
+    # length : int
     - touched : int
     /' ---- Functions ------ '/
-    + Ship(name : string , length : int, id : int, id_f_player : int)
+    + Ship(id : int)
+    + isDestroy() : boolean
+    + getId() : int
+    + getName() : string
+    + getLength() : int
+    + getTouched() : int
+    + incrementTouched() : void
+    + setDestroy(boolean destroy) : void
 }
+
+class Carrier extends Ship{
+    + Carrier(id : int)
+}
+
+class BattleShip extends Ship{
+    + BattleShip(id : int)
+}
+
+class Cruiser extends Ship{
+    + Cruiser(id : int)
+}
+
+class Submarine extends Ship{
+    + Submarine(id : int)
+}
+
+class Destroyer extends Ship{
+    + Destroyer(id : int)
+}
+
+
 
 class Player{
     - ships : Ship[]
