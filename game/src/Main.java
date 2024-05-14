@@ -31,6 +31,8 @@ public class Main {
             player1.setFleet(deserializeFleet("fleet.ser"));
             player2.setFleet(deserializeFleet("fleet.ser"));
         }
+        player1.randomlyPlaceShips();
+        player2.randomlyPlaceShips();
 
         // ----- PAGE RENDERING -----
         SwingUtilities.invokeLater(() -> {

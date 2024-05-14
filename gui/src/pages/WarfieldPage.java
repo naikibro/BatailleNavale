@@ -47,7 +47,7 @@ public class WarfieldPage extends NativeUi {
         frame.add(title, BorderLayout.NORTH);
 
         // ----- MAP -----
-        mapComponent = new MapComponent(scoreboard, getCurrentPlayer());
+        mapComponent = new MapComponent(scoreboard, getCurrentPlayer(), getEnnemyPlayer());
         frame.add(mapComponent.getPanel(), BorderLayout.CENTER);
 
         // ----- SCOREBOARD -----
@@ -114,6 +114,11 @@ public class WarfieldPage extends NativeUi {
     private Player getCurrentPlayer() {
         int gameTurn = Game.turn;
         return (gameTurn % 2 == 0) ? this.player1 : this.player2;
+    }
+
+    private Player getEnnemyPlayer() {
+        int gameTurn = Game.turn;
+        return (gameTurn % 2 == 1) ? this.player1 : this.player2;
     }
 
     private JPanel getDebugPanel(Player player1, Player player2) {
