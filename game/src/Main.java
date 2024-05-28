@@ -15,11 +15,11 @@ public class Main {
     public static void main(String[] args) {
 
         // ----- GLOBAL VARIABLES -----
-        Map map = new Map();
-        Game game = new Game(map);
-        Scoreboard scoreboard = new Scoreboard();
-        Player player1 = new Player("");
-        Player player2 = new Player();
+        Game game = new Game();
+
+        Player player1 = Game.player1;
+        Player player2 = Game.player2;
+        Scoreboard scoreboard = Game.scoreboard;
 
         // Loading the fleets from Serialization if exists
         File tempFile = new File("temp.ser");
@@ -44,7 +44,7 @@ public class Main {
             landingPage.setPlayAction(e -> {
                 System.out.println("Let's play !");
                 warfieldPage.display();
-                warfieldPage.revalidateComponents();
+                warfieldPage.revalidateComponents(false);
                 landingPage.hide();
             });
 

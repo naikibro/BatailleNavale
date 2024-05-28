@@ -1,17 +1,12 @@
 package map;
 
 public class Tile {
-
     private int x, y;
-
     private int id_ship;
-
     private boolean isHit;
 
     // ----- C O N S T R U C T O R S -----
-
-    Tile(int x, int y) {
-
+    public Tile(int x, int y) {
         this.x = x;
         this.y = y;
         this.id_ship = -1;
@@ -19,7 +14,15 @@ public class Tile {
     }
 
     // ----- M E T H O D S -----
+    public boolean isShip() {
+        return id_ship != -1;
+    }
 
+    public boolean isDestroyed() {
+        // This is a placeholder for actual logic to determine if the ship is destroyed.
+        // Actual implementation will depend on the game's logic for determining ship destruction.
+        return isHit && isShip();  // Example condition for simplicity
+    }
 
     // ----- G E T T E R S - S E T T E R S -----
     public int getX() {

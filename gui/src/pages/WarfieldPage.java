@@ -47,11 +47,11 @@ public class WarfieldPage extends NativeUi {
         frame.add(title, BorderLayout.NORTH);
 
         // ----- MAP -----
-        mapComponent = new MapComponent(scoreboard, getCurrentPlayer(), getEnnemyPlayer());
+        this.mapComponent = new MapComponent(getCurrentPlayer(), getEnnemyPlayer());
         frame.add(mapComponent.getPanel(), BorderLayout.CENTER);
 
         // ----- SCOREBOARD -----
-        rightPanel = getScoreboardPanel(scoreboard);
+        this.rightPanel = getScoreboardPanel(scoreboard);
         frame.add(rightPanel, BorderLayout.EAST);
 
         // ----- DEBUG - PANEL -----
@@ -101,7 +101,12 @@ public class WarfieldPage extends NativeUi {
         JButton nextTurn = new JButton("Validate orders");
         nextTurn.addActionListener(e -> {
             Game.turn += 1;
-            revalidateComponents();
+            revalidateComponents(false);
+
+            this.mapComponent = new MapComponent(getCurrentPlayer(), getEnnemyPlayer());
+
+            this.mapComponent.display();
+            this.revalidateComponents(true);
         });
 
         gbc.gridy = 3;
@@ -153,10 +158,19 @@ public class WarfieldPage extends NativeUi {
         this.endGameAction = endGameAction;
     }
 
-    public void revalidateComponents() {
+    public void revalidateComponents(boolean updatePlayers) {
+
+        if(updatePlayers)
+        {
+            this.mapComponent.updatePlayers(getCurrentPlayer(), getEnnemyPlayer());
+        }
+
+        // Revalidate the scoreboard panel
         frame.remove(rightPanel);
         rightPanel = getScoreboardPanel(scoreboard);
         frame.add(rightPanel, BorderLayout.EAST);
+
+        // Revalidate and repaint the frame to reflect changes
         frame.revalidate();
         frame.repaint();
     }
