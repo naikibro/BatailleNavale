@@ -47,7 +47,7 @@ public class WarfieldPage extends NativeUi {
         frame.add(title, BorderLayout.NORTH);
 
         // ----- MAP -----
-        this.mapComponent = new MapComponent(getCurrentPlayer(), getEnnemyPlayer());
+        this.mapComponent = new MapComponent( getCurrentPlayer(), getEnnemyPlayer());
         frame.add(mapComponent.getPanel(), BorderLayout.CENTER);
 
         // ----- SCOREBOARD -----
@@ -101,12 +101,12 @@ public class WarfieldPage extends NativeUi {
         JButton nextTurn = new JButton("Validate orders");
         nextTurn.addActionListener(e -> {
             Game.turn += 1;
-            revalidateComponents(false);
+            this.revalidateComponents(true);
 
             this.mapComponent = new MapComponent(getCurrentPlayer(), getEnnemyPlayer());
 
             this.mapComponent.display();
-            this.revalidateComponents(true);
+            this.revalidateComponents(false);
         });
 
         gbc.gridy = 3;
