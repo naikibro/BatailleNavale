@@ -39,9 +39,9 @@ public class Scoreboard extends NativeUi {
 
     // ----- M E T H O D S -----
 
-    public void hit(int x, int y) {
+    public void hit(Player player, int x, int y) {
         SwingUtilities.invokeLater(() -> {
-            JLabel label = new JLabel("(" + x + ", " + y + ") - Player XXX hit a target");
+            JLabel label = new JLabel("(" + x + ", " + y + ") - Player " + player.getName() + " hit a target");
             label.setForeground(Color.ORANGE);
             panel.add(label);
             panel.revalidate();
@@ -52,9 +52,9 @@ public class Scoreboard extends NativeUi {
         });
     }
 
-    public void destroy(int x, int y) {
+    public void destroy(Player player, int x, int y) {
         SwingUtilities.invokeLater(() -> {
-            JLabel label = new JLabel("(" + x + ", " + y + ") - Player XXX destroyed a XXX ship");
+            JLabel label = new JLabel("(" + x + ", " + y + ") - Player " + player.getName() + " destroyed a XXX ship");
             label.setForeground(Color.RED);
             panel.add(label);
             panel.revalidate();
@@ -65,9 +65,9 @@ public class Scoreboard extends NativeUi {
         });
     }
 
-    public void miss(int x, int y) {
+    public void miss(Player player, int x, int y) {
         SwingUtilities.invokeLater(() -> {
-            JLabel label = new JLabel("(" + x + ", " + y + ") - Player XXX missed a shot");
+            JLabel label = new JLabel("(" + x + ", " + y + ") - Player " + player.getName() + " missed a shot");
             label.setForeground(Color.CYAN);
             panel.add(label);
             panel.revalidate();

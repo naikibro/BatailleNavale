@@ -14,24 +14,26 @@ public class Player {
 
     private int id;
     private Map playerMap;
-    public String name;
+    public String name, imagePath;
     Fleet fleet;
 
     // ----- C O N S T R U C T O R -----
 
     public Player()
     {
-        this.id = 0;
+        this.id = 1;
         this.name = "Computer";
         this.playerMap = new Map();
+        this.imagePath = "gui/src/pages/player2.png";
         fleet = new Fleet();
     }
 
     public Player(String name)
     {
-        this.id = 1;
+        this.id = 0;
         this.name = name;
         playerMap = new Map();
+        this.imagePath = "gui/src/pages/player1.png";
         fleet = new Fleet();
     }
 
@@ -158,4 +160,12 @@ public class Player {
         //End
         this.playerMap.setMap(map);
     }
+    public void declineIdentity()
+    {
+        int tempId = this.id + 1;
+        System.out.println("\nPLAYER " + tempId + " : " + getName() + "\n");
+        getFleet().printFleetStatus();
+        System.out.println("\n ---------------- \n");
+    }
+
 }
