@@ -17,23 +17,15 @@ public class Fleet implements Serializable {
         this.ships = new ArrayList<>();
     }
 
-    public static Fleet createDefaultPlayerFleet(int playerId) {
+    public static Fleet createDefaultPlayerFleet() {
         Fleet fleet = new Fleet();
 
         // Add default ships to the fleet
-        if (playerId == 1) {
-            fleet.addShip(new Submarine(1));
-            fleet.addShip(new Destroyer(2));
-            fleet.addShip(new Cruiser(3));
-            fleet.addShip(new BattleShip(4));
-            fleet.addShip(new Carrier(5));
-        } else if (playerId == 2) {
-            fleet.addShip(new Submarine(1));
-            fleet.addShip(new Destroyer(2));
-            fleet.addShip(new BattleShip(3));
-            fleet.addShip(new BattleShip(4));
-            fleet.addShip(new Carrier(5));
-        }
+        fleet.addShip(new Submarine(1));
+        fleet.addShip(new Destroyer(2));
+        fleet.addShip(new Cruiser(3));
+        fleet.addShip(new BattleShip(4));
+        fleet.addShip(new Carrier(5));
 
         return fleet;
     }
