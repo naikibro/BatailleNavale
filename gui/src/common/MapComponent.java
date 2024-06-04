@@ -28,8 +28,8 @@ public class MapComponent {
     }
 
     private void initializePanel(boolean isInit) {
-        panel = new JPanel(new GridLayout(10, 10));
-        panel.removeAll();
+        this.panel = new JPanel(new GridLayout(10, 10));
+        this.panel.removeAll();
 
         if (isInit){
             buttonMap.clear();
@@ -38,18 +38,24 @@ public class MapComponent {
         for (List<Tile> row : map.getMap()) {
             for (Tile tile : row) {
                 JButton button = new JButton();
-                button.setBackground(getTileColor(tile));
+                Color tileColor = getTileColor(tile);
+
+                if(tile.isHit()){
+                    disableButton(button);
+                }
+
+                button.setBackground(tileColor);
                 button.setOpaque(true);
                 buttonMap.put(tile, button);
-                button.addActionListener(e -> handleTileClick(tile, button, panel));
-                panel.add(button);
+                button.addActionListener(e -> handleTileClick(tile, button));
+                this.panel.add(button);
             }
         }
-        panel.revalidate();
-        panel.repaint();
+        this.panel.revalidate();
+        this.panel.repaint();
     }
 
-    private void handleTileClick(Tile tile, JButton button, JPanel panel) {
+    private void handleTileClick(Tile tile, JButton button) {
         int x = tile.getX();
         int y = tile.getY();
 
@@ -78,19 +84,24 @@ public class MapComponent {
         button.setBorderPainted(false);
         button.setFocusPainted(false);
         button.setContentAreaFilled(true);
-        initializePanel(false);
-
-        // TODO: handle next player turn logic
         button.setFocusable(false);
-        Game.turn += 1;
-        warfieldPage.revalidateComponents(true);
+        disableButton(button);
+        display();
+
+        Timer timer = new Timer(3000, e -> {
+            Game.turn += 1;
+            this.warfieldPage.revalidateComponents(true);
+        });
+
+        timer.setRepeats(false); // Ensure the timer only runs once
+        timer.start();
     }
 
     public void updatePlayers(Player currentPlayer, Player enemyPlayer) {
         this.player1 = currentPlayer;
         this.player2 = enemyPlayer;
         this.map = enemyPlayer.getPlayerMap();
-        initializePanel(false);
+        initializePanel(true);
         display();
     }
 
@@ -99,8 +110,18 @@ public class MapComponent {
         panel.repaint();
     }
 
+    // ----- S E T T E R S -----
+    public void disableButton(JButton button){
+        button.setBorderPainted(false);
+        button.setFocusPainted(false);
+        button.setContentAreaFilled(true);
+        button.setFocusable(false);
+    }
+
+    // ----- G E T T E R S -----
+
     public JPanel getPanel() {
-        return panel;
+        return this.panel;
     }
 
     private Color getTileColor(Tile tile) {
