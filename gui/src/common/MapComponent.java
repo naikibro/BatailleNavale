@@ -2,6 +2,7 @@ package common;
 
 import map.Map;
 import map.Tile;
+import pages.WarfieldPage;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,34 +14,45 @@ public class MapComponent {
     private JPanel panel;
     private Scoreboard scoreboard;
     private Player player1, player2;
-    private HashMap<Tile, JButton> buttonMap;
+    private HashMap<Tile, JComponent> buttonMap;
+    private WarfieldPage warfieldPage;
 
-    public MapComponent(Player player1, Player player2) {
+    public MapComponent(Player player1, Player player2, WarfieldPage page) {
         this.scoreboard = Game.scoreboard;
         this.player1 = player1;
         this.player2 = player2;
         this.map = player2.getPlayerMap();
         this.buttonMap = new HashMap<>();
-        initializePanel();
+        this.warfieldPage = page;
+        initializePanel(true);
     }
 
-    private void initializePanel() {
-        panel = new JPanel(new GridLayout(10, 10));
-        panel.removeAll();
-        buttonMap.clear();
+    private void initializePanel(boolean isInit) {
+        this.panel = new JPanel(new GridLayout(10, 10));
+        this.panel.removeAll();
+
+        if (isInit){
+            buttonMap.clear();
+        }
 
         for (List<Tile> row : map.getMap()) {
             for (Tile tile : row) {
                 JButton button = new JButton();
-                button.setBackground(getTileColor(tile));
+                Color tileColor = getTileColor(tile);
+
+                if(tile.isHit()){
+                    disableButton(button);
+                }
+
+                button.setBackground(tileColor);
                 button.setOpaque(true);
                 buttonMap.put(tile, button);
                 button.addActionListener(e -> handleTileClick(tile, button));
-                panel.add(button);
+                this.panel.add(button);
             }
         }
-        panel.revalidate();
-        panel.repaint();
+        this.panel.revalidate();
+        this.panel.repaint();
     }
 
     private void handleTileClick(Tile tile, JButton button) {
@@ -49,23 +61,47 @@ public class MapComponent {
 
         System.out.println("Click on x: " + x + ", y: " + y + " id_ship = " + tile.getId_ship());
 
+        // TODO: handle the button clickable state
+        if(! button.isFocusable())
+        {
+            return;
+        }
+
         if (tile.isShip()) {
             scoreboard.hit(player1, x, y);
             tile.setHit(true);
+            button.setBackground(Color.ORANGE);
             if (tile.isDestroyed()) {
                 scoreboard.destroy(player1, x, y);
+                button.setBackground(Color.RED);
             }
         } else {
             scoreboard.miss(player1, x, y);
             tile.setHit(true);
+            button.setBackground(Color.BLUE);
         }
+
+        button.setBorderPainted(false);
+        button.setFocusPainted(false);
+        button.setContentAreaFilled(true);
+        button.setFocusable(false);
+        disableButton(button);
+        display();
+
+        Timer timer = new Timer(3000, e -> {
+            Game.turn += 1;
+            this.warfieldPage.revalidateComponents(true);
+        });
+
+        timer.setRepeats(false); // Ensure the timer only runs once
+        timer.start();
     }
 
     public void updatePlayers(Player currentPlayer, Player enemyPlayer) {
         this.player1 = currentPlayer;
         this.player2 = enemyPlayer;
         this.map = enemyPlayer.getPlayerMap();
-        initializePanel();
+        initializePanel(true);
         display();
     }
 
@@ -74,8 +110,18 @@ public class MapComponent {
         panel.repaint();
     }
 
+    // ----- S E T T E R S -----
+    public void disableButton(JButton button){
+        button.setBorderPainted(false);
+        button.setFocusPainted(false);
+        button.setContentAreaFilled(true);
+        button.setFocusable(false);
+    }
+
+    // ----- G E T T E R S -----
+
     public JPanel getPanel() {
-        return panel;
+        return this.panel;
     }
 
     private Color getTileColor(Tile tile) {

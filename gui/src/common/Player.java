@@ -153,9 +153,7 @@ public class Player {
                         }
                     }
                 }
-
             }
-
         }
         //End
         this.playerMap.setMap(map);
