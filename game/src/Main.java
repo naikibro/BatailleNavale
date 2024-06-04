@@ -37,7 +37,7 @@ public class Main {
         // ----- PAGE RENDERING -----
         SwingUtilities.invokeLater(() -> {
             WarfieldPage warfieldPage = new WarfieldPage(scoreboard, player1, player2);
-            LandingPage landingPage = new LandingPage(player1);
+            LandingPage landingPage = new LandingPage(player1, player2);
             GameOverPage gameOverPage = new GameOverPage(scoreboard, player1, player2);
 
             // Set up the action for the play button
