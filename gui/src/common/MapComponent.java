@@ -71,11 +71,16 @@ public class MapComponent {
             scoreboard.hit(player1, x, y);
             tile.setHit(true);
             button.setBackground(Color.ORANGE);
+            ImageIcon gifIcon = new ImageIcon("gui/src/assets/boom.gif");
+            button.setIcon(gifIcon);
             if (tile.isDestroyed()) {
                 scoreboard.destroy(player1, x, y);
                 button.setBackground(Color.RED);
             }
         } else {
+            ImageIcon gifIcon = new ImageIcon("gui/src/assets/glouglou.gif");
+            button.setIcon(gifIcon);
+
             scoreboard.miss(player1, x, y);
             tile.setHit(true);
             button.setBackground(Color.BLUE);
@@ -85,10 +90,11 @@ public class MapComponent {
         button.setFocusPainted(false);
         button.setContentAreaFilled(true);
         button.setFocusable(false);
+
         disableButton(button);
         display();
 
-        Timer timer = new Timer(3000, e -> {
+        Timer timer = new Timer(1300, e -> {
             Game.turn += 1;
             this.warfieldPage.revalidateComponents(true);
         });
