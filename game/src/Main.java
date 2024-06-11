@@ -44,7 +44,6 @@ public class Main {
             landingPage.setPlayAction(e -> {
                 System.out.println("Let's play !");
                 warfieldPage.display();
-                warfieldPage.revalidateComponents(false);
                 landingPage.hide();
             });
 

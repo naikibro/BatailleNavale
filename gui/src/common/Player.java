@@ -13,6 +13,7 @@ import java.util.Random;
 public class Player {
 
     private int id;
+    private int score = 0;
     private Map playerMap;
     public String name, imagePath;
     Fleet fleet;
@@ -38,6 +39,18 @@ public class Player {
     }
 
     // ----- G E T T E R S - S E T T E R S -----
+    public int getScore() {
+        return this.score;
+    }
+
+    public void incrementScore() {
+        this.score += 1;
+    }
+
+    public boolean isWin() {
+        return this.score == 21;
+    }
+
     public Map getPlayerMap() {
         return this.playerMap;
     }

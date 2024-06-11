@@ -101,12 +101,11 @@ public class WarfieldPage extends NativeUi {
         JButton nextTurn = new JButton("Validate orders");
         nextTurn.addActionListener(e -> {
             Game.turn += 1;
-            this.revalidateComponents(true);
+            this.revalidateComponents();
 
             this.mapComponent = new MapComponent(getCurrentPlayer(), getEnnemyPlayer(), this);
 
             this.mapComponent.display();
-            this.revalidateComponents(false);
         });
 
         gbc.gridy = 3;
@@ -158,12 +157,9 @@ public class WarfieldPage extends NativeUi {
         this.endGameAction = endGameAction;
     }
 
-    public void revalidateComponents(boolean updatePlayers) {
+    public void revalidateComponents() {
         frame.remove(this.mapComponent.getPanel());
-        if(updatePlayers)
-        {
-            this.mapComponent.updatePlayers(getCurrentPlayer(), getEnnemyPlayer());
-        }
+        this.mapComponent.updatePlayers(getCurrentPlayer(), getEnnemyPlayer());
         frame.add(this.mapComponent.getPanel(), BorderLayout.CENTER);
         // Revalidate the scoreboard panel
         frame.remove(rightPanel);
