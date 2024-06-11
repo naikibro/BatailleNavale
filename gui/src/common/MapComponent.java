@@ -6,8 +6,11 @@ import pages.GameOverPage;
 import pages.WarfieldPage;
 import pages.WinPage;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +24,7 @@ public class MapComponent {
     private WarfieldPage warfieldPage;
     private WinPage winPage;
     private List<JButton> buttonList;
+    private Clip musicClip;
 
     public MapComponent(Player player1, Player player2, WarfieldPage page) {
         this.scoreboard = Game.scoreboard;
@@ -103,6 +107,7 @@ public class MapComponent {
             this.player1.incrementScore();
             button.setBackground(Color.ORANGE);
             ImageIcon gifIcon = new ImageIcon("gui/src/assets/boom.gif");
+            playSound("gui/src/assets/boom.wav");
             button.setIcon(gifIcon);
             if (tile.isDestroyed()) {
                 scoreboard.destroy(player1, x, y, shipName);
@@ -110,6 +115,7 @@ public class MapComponent {
             }
         } else {
             ImageIcon gifIcon = new ImageIcon("gui/src/assets/glouglou.gif");
+            playSound("gui/src/assets/ploof.wav");
             button.setIcon(gifIcon);
             scoreboard.miss(player1, x, y);
             button.setBackground(Color.BLUE);
@@ -157,6 +163,22 @@ public class MapComponent {
     public void display() {
         panel.revalidate();
         panel.repaint();
+    }
+
+    private void playSound(String filePath) {
+        File musicFile = new File(filePath);
+        if (!musicFile.exists()) {
+            System.err.println("Music file not found at: " + musicFile.getAbsolutePath());
+            return;
+        }
+        try {
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(musicFile);
+            musicClip = AudioSystem.getClip();
+            musicClip.open(audioStream);
+            musicClip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
     }
 
     // ----- S E T T E R S -----
