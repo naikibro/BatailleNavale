@@ -23,16 +23,16 @@ public class Main {
 
         // Loading the fleets from Serialization if exists
         File tempFile = new File("temp.ser");
+        System.out.println("----- F L E E T - I N I T -----\n");
         if (tempFile.exists()) {
-            System.out.println("Loading fleet from save file");
             player1.setFleet(deserializeFleet("temp.ser"));
         } else {
-            System.out.println("Loading fleet from default config file");
             player1.setFleet(deserializeFleet("fleet.ser"));
             player2.setFleet(deserializeFleet("fleet.ser"));
         }
         player1.randomlyPlaceShips();
         player2.randomlyPlaceShips();
+        System.out.println("\nAll ships have been placed successfully");
 
         // ----- PAGE RENDERING -----
         SwingUtilities.invokeLater(() -> {
@@ -42,7 +42,7 @@ public class Main {
 
             // Set up the action for the play button
             landingPage.setPlayAction(e -> {
-                System.out.println("Let's play !");
+                System.out.println("Let's play !\n");
                 warfieldPage.display();
                 landingPage.hide();
             });
@@ -53,7 +53,7 @@ public class Main {
                 warfieldPage.hide();
             });
 
-            System.out.println("Instantiated");
+            System.out.println("\n----- G A M E - L O O P -----\n");
             landingPage.display();
         });
 

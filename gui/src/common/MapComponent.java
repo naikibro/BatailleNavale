@@ -8,6 +8,7 @@ import pages.WinPage;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class MapComponent {
     private HashMap<Tile, JComponent> buttonMap;
     private WarfieldPage warfieldPage;
     private WinPage winPage;
+    private List<JButton> buttonList;
 
     public MapComponent(Player player1, Player player2, WarfieldPage page) {
         this.scoreboard = Game.scoreboard;
@@ -27,6 +29,7 @@ public class MapComponent {
         this.map = player2.getPlayerMap();
         this.buttonMap = new HashMap<>();
         this.warfieldPage = page;
+        this.buttonList = new ArrayList<>();
         initializePanel(true);
     }
 
@@ -36,6 +39,7 @@ public class MapComponent {
 
         if (isInit){
             buttonMap.clear();
+            buttonList.clear();
         }
 
         for (List<Tile> row : map.getMap()) {
@@ -45,74 +49,95 @@ public class MapComponent {
 
                 if(tile.isHit()){
                     disableButton(button);
+                } else {
+                    button.addActionListener(e -> handleTileClick(tile, button));
                 }
 
                 button.setBackground(tileColor);
                 button.setOpaque(true);
+
                 buttonMap.put(tile, button);
-                button.addActionListener(e -> handleTileClick(tile, button));
+                buttonList.add(button);
                 this.panel.add(button);
             }
         }
+
         this.panel.revalidate();
         this.panel.repaint();
     }
 
+    private void disableButtons(Tile tile, JButton exceptionButton)
+    {
+        buttonList.remove(exceptionButton);
+        for (JButton button : buttonList) {
+            button.setFocusable(false);
+            if(!button.isBackgroundSet()){
+                button.setEnabled(false);
+            }
+        }
+    }
+
+    private void enableButtons(Tile tile, JButton exceptionButton) {
+        buttonList.add(exceptionButton);
+        for (JButton button : buttonList) {
+            button.setFocusable(true);
+            button.setEnabled(true);
+        }
+    }
+
     private void handleTileClick(Tile tile, JButton button) {
+
         int x = tile.getX();
         int y = tile.getY();
+        String shipName = tile.getShipName(tile.getId_ship());
 
-        System.out.println("Click on x: " + x + ", y: " + y + " id_ship = " + tile.getId_ship());
-
-        // TODO: handle the button clickable state
         if(! button.isFocusable())
         {
             return;
         }
+        tile.setHit(true);
+        disableButtons(tile, button);
 
         if (tile.isShip()) {
             scoreboard.hit(player1, x, y);
-            tile.setHit(true);
             this.player1.incrementScore();
             button.setBackground(Color.ORANGE);
             ImageIcon gifIcon = new ImageIcon("gui/src/assets/boom.gif");
             button.setIcon(gifIcon);
             if (tile.isDestroyed()) {
-                scoreboard.destroy(player1, x, y);
+                scoreboard.destroy(player1, x, y, shipName);
                 button.setBackground(Color.RED);
             }
         } else {
             ImageIcon gifIcon = new ImageIcon("gui/src/assets/glouglou.gif");
             button.setIcon(gifIcon);
-
             scoreboard.miss(player1, x, y);
-            tile.setHit(true);
             button.setBackground(Color.BLUE);
         }
 
-        button.setBorderPainted(false);
-        button.setFocusPainted(false);
-        button.setContentAreaFilled(true);
-        button.setFocusable(false);
-
         disableButton(button);
-        display();
+        Timer timer = getTimer(tile, button);
+        timer.start();
+    }
 
+    private Timer getTimer(Tile tile, JButton button) {
         Timer timer = new Timer(1300, e -> {
             if(this.player1.isWin()){
-                System.out.println("End Game !");
+                System.out.println("\nEnd Game !");
                 System.out.println(this.player1.getName() + " Wins");
                 this.winPage = new WinPage(this.player1);
                 this.winPage.display();
                 this.warfieldPage.hide();
             }
             Game.turn += 1;
-            System.out.println("Le score du joueur " + this.player1.getName() + " est " + this.player1.getScore());
+            System.out.println("score  " + this.player1.getName() + ": " + this.player1.getScore());
+            System.out.println("end of turn: " + Game.turn + "\n");
             this.warfieldPage.revalidateComponents();
+            enableButtons(tile, button);
         });
 
         timer.setRepeats(false); // Ensure the timer only runs once
-        timer.start();
+        return timer;
     }
 
     public void updatePlayers(Player currentPlayer, Player enemyPlayer) {
@@ -121,6 +146,12 @@ public class MapComponent {
         this.map = enemyPlayer.getPlayerMap();
         initializePanel(true);
         display();
+    }
+
+    public void clearConsole() {
+        // ANSI escape code to clear the screen
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 
     public void display() {
@@ -137,6 +168,15 @@ public class MapComponent {
     }
 
     // ----- G E T T E R S -----
+
+    public Tile getTile(int x, int y) {
+        // Retrieve the tile at the specified coordinates
+        if (x >= 0 && x < 10 && y >= 0 && y < 10) {
+            return map.getMap().get(x).get(y);
+        } else {
+            throw new IndexOutOfBoundsException("Invalid coordinates: (" + x + ", " + y + ")");
+        }
+    }
 
     public JPanel getPanel() {
         return this.panel;

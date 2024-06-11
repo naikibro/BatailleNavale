@@ -93,7 +93,7 @@ public class WarfieldPage extends NativeUi {
         rightPanel.add(picLabel, gbc);
 
         // Display the player's turn
-        JLabel turn = new JLabel("It's " + currentPlayer.getName() + "'s turn to play");
+        JLabel turn = new JLabel("               It's " + currentPlayer.getName() + "'s turn to play");
         gbc.gridy = 2;
         gbc.weighty = 0.1;
         rightPanel.add(turn, gbc);
@@ -110,7 +110,6 @@ public class WarfieldPage extends NativeUi {
 
         gbc.gridy = 3;
         gbc.weighty = 0.1;
-        rightPanel.add(nextTurn, gbc);
 
         return rightPanel;
     }

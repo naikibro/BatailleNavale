@@ -71,10 +71,23 @@ public class Player {
         return fleet;
     }
 
+    public String getShipNameById(int id) {
+        for (Ship ship : fleet.getShips()) {
+            if (ship.getId() == id) {
+                return ship.getName();
+            }
+        }
+        // If no ship is found with the given id, return null or a suitable message
+        return null;
+    }
+
     public void setFleet(Fleet fleet) {
         this.fleet = fleet;
     }
 
+    /**
+     * TODO: refactor
+     */
     public void randomlyPlaceShips(){
         // Variables
         List<Ship> ships = this.fleet.getShips();
@@ -87,7 +100,7 @@ public class Player {
 
         // Start
         for(Ship ship : ships ){
-            System.out.println(ship.getName());
+
             taille_ship = ship.getLength();
             id_ship = ship.getId();
             canPlaceShip = false;
@@ -158,11 +171,11 @@ public class Player {
                     }
 
                     if (canPlaceShip) {
-                        System.out.println("Le navire a été placé avec succès à la position : " + x + "," + y + " et à la direction : " + direction);
+                        System.out.println("- "+ship.getName() + " (" + x + "," + y + ") direction: " + direction);
                     } else {
-                        System.out.println("Impossible de placer le navire à la position : " + x + "," + y + " et à la direction : " + direction);
+                        System.out.println("\t- (" + x + "," + y + ") direction: " + direction);
                         if(directions.isEmpty()){
-                            System.out.println("Changement de position x et y...");
+                            System.out.println("\t- Changement de position x et y...");
                         }
                     }
                 }
