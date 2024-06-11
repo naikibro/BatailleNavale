@@ -2,7 +2,9 @@ package common;
 
 import map.Map;
 import map.Tile;
+import pages.GameOverPage;
 import pages.WarfieldPage;
+import pages.WinPage;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,6 +18,7 @@ public class MapComponent {
     private Player player1, player2;
     private HashMap<Tile, JComponent> buttonMap;
     private WarfieldPage warfieldPage;
+    private WinPage winPage;
 
     public MapComponent(Player player1, Player player2, WarfieldPage page) {
         this.scoreboard = Game.scoreboard;
@@ -70,6 +73,7 @@ public class MapComponent {
         if (tile.isShip()) {
             scoreboard.hit(player1, x, y);
             tile.setHit(true);
+            this.player1.incrementScore();
             button.setBackground(Color.ORANGE);
             ImageIcon gifIcon = new ImageIcon("gui/src/assets/boom.gif");
             button.setIcon(gifIcon);
@@ -95,8 +99,16 @@ public class MapComponent {
         display();
 
         Timer timer = new Timer(1300, e -> {
+            if(this.player1.isWin()){
+                System.out.println("End Game !");
+                System.out.println(this.player1.getName() + " Wins");
+                this.winPage = new WinPage(this.player1);
+                this.winPage.display();
+                this.warfieldPage.hide();
+            }
             Game.turn += 1;
-            this.warfieldPage.revalidateComponents(true);
+            System.out.println("Le score du joueur " + this.player1.getName() + " est " + this.player1.getScore());
+            this.warfieldPage.revalidateComponents();
         });
 
         timer.setRepeats(false); // Ensure the timer only runs once
