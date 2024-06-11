@@ -1,5 +1,9 @@
 package map;
 
+import common.Game;
+import common.Player;
+import ship.Ship;
+
 public class Tile {
     private int x, y;
     private int id_ship;
@@ -51,6 +55,12 @@ public class Tile {
 
     public int getId_ship() {
         return id_ship;
+    }
+
+    public String getShipName(int id_ship){
+
+        Player tempPlayer = (Game.turn % 2 == 0) ? Game.player1 : Game.player2;
+        return tempPlayer.getShipNameById(id_ship);
     }
 
     public void setId_ship(int id_ship) {

@@ -42,6 +42,7 @@ public class Scoreboard extends NativeUi {
     public void hit(Player player, int x, int y) {
         SwingUtilities.invokeLater(() -> {
             JLabel label = new JLabel("(" + x + ", " + y + ") - Player " + player.getName() + " hit a target");
+            System.out.println("(" + x + ", " + y + ") - Player " + player.getName() + " hit a target");
             label.setForeground(Color.ORANGE);
             panel.add(label);
             panel.revalidate();
@@ -52,14 +53,14 @@ public class Scoreboard extends NativeUi {
         });
     }
 
-    public void destroy(Player player, int x, int y) {
+    public void destroy(Player player, int x, int y, String shipName) {
         SwingUtilities.invokeLater(() -> {
-            JLabel label = new JLabel("(" + x + ", " + y + ") - Player " + player.getName() + " destroyed a XXX ship");
+            JLabel label = new JLabel("(" + x + ", " + y + ") - Player " + player.getName() + " destroyed a " + shipName);
+            System.out.println("(" + x + ", " + y + ") - Player " + player.getName() +  " destroyed a " + shipName);
             label.setForeground(Color.RED);
             panel.add(label);
             panel.revalidate();
             panel.repaint();
-
             scrollPane.revalidate();
             scrollPane.repaint();
         });
@@ -68,6 +69,7 @@ public class Scoreboard extends NativeUi {
     public void miss(Player player, int x, int y) {
         SwingUtilities.invokeLater(() -> {
             JLabel label = new JLabel("(" + x + ", " + y + ") - Player " + player.getName() + " missed a shot");
+            System.out.println("(" + x + ", " + y + ") - Player " + player.getName() + " missed a shot");
             label.setForeground(Color.CYAN);
             panel.add(label);
             panel.revalidate();
@@ -82,7 +84,6 @@ public class Scoreboard extends NativeUi {
         SwingUtilities.invokeLater(() -> {
             panel.revalidate();
             panel.repaint();
-
             scrollPane.revalidate();
             scrollPane.repaint();
         });
