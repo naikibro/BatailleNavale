@@ -6,6 +6,7 @@ import common.Player;
 import common.Scoreboard;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -23,6 +24,7 @@ public class WarfieldPage extends NativeUi {
     private Player player2;
 
     ActionListener endGameAction;
+    private Clip musicClip;
 
     public WarfieldPage(Scoreboard sboard, Player player1, Player player2) {
         super();
@@ -57,6 +59,26 @@ public class WarfieldPage extends NativeUi {
         // ----- DEBUG - PANEL -----
         JPanel debugPanel = getDebugPanel(player1, player2);
         frame.add(debugPanel, BorderLayout.SOUTH);
+
+        playBackgroundMusic("gui/src/assets/music.wav");
+    }
+
+    private void playBackgroundMusic(String filePath) {
+        File musicFile = new File(filePath);
+        if (!musicFile.exists()) {
+            System.err.println("Music file not found at: " + musicFile.getAbsolutePath());
+            return;
+        }
+
+        try {
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(musicFile);
+            musicClip = AudioSystem.getClip();
+            musicClip.open(audioStream);
+            musicClip.loop(Clip.LOOP_CONTINUOUSLY);
+            musicClip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
     }
 
     private JPanel getScoreboardPanel(Scoreboard scoreboard) {
