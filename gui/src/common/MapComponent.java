@@ -115,27 +115,29 @@ public class MapComponent {
             button.setBackground(Color.BLUE);
         }
 
-        button.setBorderPainted(false);
-        button.setFocusPainted(false);
-        button.setContentAreaFilled(true);
-        button.setFocusable(false);
+        disableButton(button);
+        Timer timer = getTimer(tile, button);
+        timer.start();
+    }
 
+    private Timer getTimer(Tile tile, JButton button) {
         Timer timer = new Timer(1300, e -> {
             if(this.player1.isWin()){
-                System.out.println("End Game !");
+                System.out.println("\nEnd Game !");
                 System.out.println(this.player1.getName() + " Wins");
                 this.winPage = new WinPage(this.player1);
                 this.winPage.display();
                 this.warfieldPage.hide();
             }
             Game.turn += 1;
-            System.out.println("Le score du joueur " + this.player1.getName() + " est " + this.player1.getScore());
+            System.out.println("score  " + this.player1.getName() + ": " + this.player1.getScore());
+            System.out.println("end of turn: " + Game.turn + "\n");
             this.warfieldPage.revalidateComponents();
             enableButtons(tile, button);
         });
 
         timer.setRepeats(false); // Ensure the timer only runs once
-        timer.start();
+        return timer;
     }
 
     public void updatePlayers(Player currentPlayer, Player enemyPlayer) {

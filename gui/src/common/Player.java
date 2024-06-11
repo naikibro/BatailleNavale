@@ -85,6 +85,9 @@ public class Player {
         this.fleet = fleet;
     }
 
+    /**
+     * TODO: refactor
+     */
     public void randomlyPlaceShips(){
         // Variables
         List<Ship> ships = this.fleet.getShips();
