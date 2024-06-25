@@ -1,8 +1,6 @@
 package pages;
 
 import common.Player;
-import common.Scoreboard;
-
 import javax.swing.*;
 import java.awt.*;
 

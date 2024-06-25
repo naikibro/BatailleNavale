@@ -2,7 +2,6 @@ package common;
 
 import map.Map;
 import map.Tile;
-import pages.GameOverPage;
 import pages.WarfieldPage;
 import pages.WinPage;
 
@@ -70,7 +69,7 @@ public class MapComponent {
         this.panel.repaint();
     }
 
-    private void disableButtons(Tile tile, JButton exceptionButton)
+    private void disableButtons(JButton exceptionButton)
     {
         buttonList.remove(exceptionButton);
         for (JButton button : buttonList) {
@@ -81,7 +80,7 @@ public class MapComponent {
         }
     }
 
-    private void enableButtons(Tile tile, JButton exceptionButton) {
+    private void enableButtons(JButton exceptionButton) {
         buttonList.add(exceptionButton);
         for (JButton button : buttonList) {
             button.setFocusable(true);
@@ -100,22 +99,22 @@ public class MapComponent {
             return;
         }
         tile.setHit(true);
-        disableButtons(tile, button);
+        disableButtons(button);
 
         if (tile.isShip()) {
             scoreboard.hit(player1, x, y);
             this.player1.incrementScore();
             button.setBackground(Color.ORANGE);
-            ImageIcon gifIcon = new ImageIcon("gui/src/assets/boom.gif");
-            playSound("gui/src/assets/boom.wav");
+            ImageIcon gifIcon = new ImageIcon("main/src/assets/boom.gif");
+            playSound("main/src/assets/boom.wav");
             button.setIcon(gifIcon);
             if (tile.isDestroyed()) {
                 scoreboard.destroy(player1, x, y, shipName);
                 button.setBackground(Color.RED);
             }
         } else {
-            ImageIcon gifIcon = new ImageIcon("gui/src/assets/glouglou.gif");
-            playSound("gui/src/assets/ploof.wav");
+            ImageIcon gifIcon = new ImageIcon("main/src/assets/glouglou.gif");
+            playSound("main/src/assets/ploof.wav");
             button.setIcon(gifIcon);
             scoreboard.miss(player1, x, y);
             button.setBackground(Color.BLUE);
@@ -139,7 +138,7 @@ public class MapComponent {
             System.out.println("score  " + this.player1.getName() + ": " + this.player1.getScore());
             System.out.println("end of turn: " + Game.turn + "\n");
             this.warfieldPage.revalidateComponents();
-            enableButtons(tile, button);
+            enableButtons(button);
         });
 
         timer.setRepeats(false); // Ensure the timer only runs once

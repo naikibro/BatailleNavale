@@ -53,14 +53,14 @@ public class WarfieldPage extends NativeUi {
         frame.add(mapComponent.getPanel(), BorderLayout.CENTER);
 
         // ----- SCOREBOARD -----
-        this.rightPanel = getScoreboardPanel(scoreboard);
+        this.rightPanel = getScoreboardPanel(scoreboard, this.getCurrentPlayer());
         frame.add(rightPanel, BorderLayout.EAST);
 
         // ----- DEBUG - PANEL -----
         JPanel debugPanel = getDebugPanel(player1, player2);
         frame.add(debugPanel, BorderLayout.SOUTH);
 
-        playBackgroundMusic("gui/src/assets/music.wav");
+        playBackgroundMusic("main/src/assets/music.wav");
     }
 
     private void playBackgroundMusic(String filePath) {
@@ -81,10 +81,8 @@ public class WarfieldPage extends NativeUi {
         }
     }
 
-    private JPanel getScoreboardPanel(Scoreboard scoreboard) {
+    private JPanel getScoreboardPanel(Scoreboard scoreboard, Player currentPlayer) {
         JPanel rightPanel = new JPanel(new GridBagLayout());
-
-        Player currentPlayer = getCurrentPlayer();
 
         // Apply a constrained Layout
         GridBagConstraints gbc = new GridBagConstraints();
@@ -184,7 +182,7 @@ public class WarfieldPage extends NativeUi {
         frame.add(this.mapComponent.getPanel(), BorderLayout.CENTER);
         // Revalidate the scoreboard panel
         frame.remove(rightPanel);
-        rightPanel = getScoreboardPanel(scoreboard);
+        rightPanel = getScoreboardPanel(scoreboard, this.getCurrentPlayer());
         frame.add(rightPanel, BorderLayout.EAST);
 
         // Revalidate and repaint the frame to reflect changes
