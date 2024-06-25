@@ -25,7 +25,7 @@ public class Player {
         this.id = 1;
         this.name = "Computer";
         this.playerMap = new Map();
-        this.imagePath = "gui/src/pages/player2.png";
+        this.imagePath = "main/src/pages/player2.png";
         fleet = new Fleet();
     }
 
@@ -34,7 +34,7 @@ public class Player {
         this.id = 0;
         this.name = name;
         playerMap = new Map();
-        this.imagePath = "gui/src/pages/player1.png";
+        this.imagePath = "main/src/pages/player1.png";
         fleet = new Fleet();
     }
 

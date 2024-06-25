@@ -1,7 +1,6 @@
 import common.Game;
 import common.Player;
 import common.Scoreboard;
-import map.Map;
 import pages.GameOverPage;
 import pages.LandingPage;
 import pages.WarfieldPage;
@@ -36,13 +35,14 @@ public class Main {
 
         // ----- PAGE RENDERING -----
         SwingUtilities.invokeLater(() -> {
-            WarfieldPage warfieldPage = new WarfieldPage(scoreboard, player1, player2);
             LandingPage landingPage = new LandingPage(player1, player2);
+            WarfieldPage warfieldPage = new WarfieldPage(scoreboard, player1, player2);
             GameOverPage gameOverPage = new GameOverPage(scoreboard, player1, player2);
 
             // Set up the action for the play button
             landingPage.setPlayAction(e -> {
                 System.out.println("Let's play !\n");
+                warfieldPage.revalidateComponents();
                 warfieldPage.display();
                 landingPage.hide();
             });

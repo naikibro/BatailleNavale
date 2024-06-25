@@ -46,13 +46,13 @@ To run the game, navigate to the `src` directory in your IDE and run the main cl
 
 This project illustrates several key OOP concepts:
 
-- ~~**[Introspection:](gui/src/common/Scoreboard.java)** Utilizing Java's reflection capabilities to dynamically inspect classes.~~ SUNSETTED
-- **[Polymorphism:](gui/src/ship/BattleShip.java)** Using superclass references to operate on objects of various subclasses.
-- **[Encapsulation:](gui/src/ship/Ship.java)** Restricting direct access to some of the object's components.
-- **[Error Handling:](gui/src/common/MapComponent.java)** Implementing comprehensive error handling throughout the game to manage runtime exceptions effectively.
-- **[GUI Development:](gui/src/pages/LandingPage.java)** Employing Java Swing to create interactive and visually appealing user interfaces.
-- **[Serialization:](gui/src/fleet/Fleet.java)** Creating binary representations of actual Java objects
-- **[Events:](gui/src/common/MapComponent.java)** trigger methods on events
+- ~~**[Introspection:](main/src/common/Scoreboard.java)** Utilizing Java's reflection capabilities to dynamically inspect classes.~~ SUNSETTED
+- **[Polymorphism:](main/src/ship/BattleShip.java)** Using superclass references to operate on objects of various subclasses.
+- **[Encapsulation:](main/src/ship/Ship.java)** Restricting direct access to some of the object's components.
+- **[Error Handling:](main/src/common/MapComponent.java)** Implementing comprehensive error handling throughout the game to manage runtime exceptions effectively.
+- **[GUI Development:](main/src/pages/LandingPage.java)** Employing Java Swing to create interactive and visually appealing user interfaces.
+- **[Serialization:](main/src/fleet/Fleet.java)** Creating binary representations of actual Java objects
+- **[Events:](main/src/common/MapComponent.java)** trigger methods on events
 
 ### The words of the authors
 

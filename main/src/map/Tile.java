@@ -2,7 +2,6 @@ package map;
 
 import common.Game;
 import common.Player;
-import ship.Ship;
 
 public class Tile {
     private int x, y;
